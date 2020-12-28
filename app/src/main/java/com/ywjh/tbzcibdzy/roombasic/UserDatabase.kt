@@ -20,14 +20,15 @@ import androidx.sqlite.db.SupportSQLiteDatabase
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.applicationContext, UserDatabase::class.java, "user_database")
                     .fallbackToDestructiveMigration()
-                    .allowMainThreadQueries()
-                    //.addMigrations(MIGRATION_6_7)
+                    //.allowMainThreadQueries()
+                    //.addMigrations(MIGRATION_2_3)
                     .build()
             }
             return INSTANCE
         }
-    }
 
+
+    }
     abstract fun getUserDao(): UserDao
 }
 

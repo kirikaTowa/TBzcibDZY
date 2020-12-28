@@ -5,6 +5,8 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.ywjh.tbzcibdzy.R
+import com.ywjh.tbzcibdzy.roombasic.GoodsDao
+import com.ywjh.tbzcibdzy.roombasic.GoodsDatabase
 import com.ywjh.tbzcibdzy.roombasic.UserDao
 import com.ywjh.tbzcibdzy.roombasic.UserDatabase
 
@@ -19,6 +21,7 @@ abstract class BaseActivity: AppCompatActivity(), AnkoLogger {
     lateinit var userdao: UserDao
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutid())//基类抽取界面组
@@ -29,6 +32,8 @@ abstract class BaseActivity: AppCompatActivity(), AnkoLogger {
     open protected fun initDate() {
         userdatabase=UserDatabase.getDatabase(applicationContext)!!
         userdao=userdatabase?.getUserDao()!!
+
+
 
     }
 

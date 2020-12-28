@@ -12,7 +12,11 @@
         icon="@drawable/placeholder"
         title="地图" />
     <tab
-        id="@+id/tab_shop"
+         id="@+id/tab_ingoods"
+         icon="@drawable/love_letter_1"
+         title="上架" />
+    <tab
+        id="@+id/tab_shopcar"
         icon="@drawable/shopping_cart"
         title="购物车" />
     <tab

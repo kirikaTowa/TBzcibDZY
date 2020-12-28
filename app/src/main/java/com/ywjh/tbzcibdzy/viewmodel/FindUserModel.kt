@@ -7,7 +7,7 @@ import com.ywjh.tbzcibdzy.roombasic.User
 
 class FindUserModel:ViewModel() {
 
-        var findUser: MutableLiveData<User>? = null
+        var findUser:LiveData<User>? = null
                 get() {
                         if (field == null) {
                                 field = MutableLiveData()

@@ -1,10 +1,7 @@
 package com.ywjh.tbzcibdzy.utils
 
+import com.ywjh.stusqlmanager.ui.fragment.*
 import com.ywjh.tbzcibdzy.R
-import com.ywjh.stusqlmanager.ui.fragment.ShopFragment
-import com.ywjh.stusqlmanager.ui.fragment.HomeFragment
-import com.ywjh.stusqlmanager.ui.fragment.MapFragment
-import com.ywjh.stusqlmanager.ui.fragment.MyFragment
 
 import com.ywjh.tbzcibdzy.base.BaseFragment
 
@@ -14,7 +11,8 @@ import com.ywjh.tbzcibdzy.base.BaseFragment
 class FragmentUtil private constructor(){//私有化构造方法
     val homeFragment by lazy { HomeFragment()  }
     val mapFragment by lazy { MapFragment()  }
-    val shopFragment by lazy {ShopFragment()  }
+    val goodsFragment by lazy { InGoodsFragment()  }
+    val shopcarFragment by lazy {ShopCarFragment()  }
     val myFragment by lazy { MyFragment()  }
 
     companion object{//伴生对象
@@ -26,7 +24,8 @@ class FragmentUtil private constructor(){//私有化构造方法
         when(tabId){
             R.id.tab_home -> return  homeFragment
             R.id.tab_map -> return  mapFragment
-            R.id.tab_shop-> return  shopFragment
+            R.id.tab_ingoods -> return  goodsFragment
+            R.id.tab_shopcar-> return  shopcarFragment
             R.id.tab_my -> return  myFragment
         }
 

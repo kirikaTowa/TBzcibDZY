@@ -22,7 +22,7 @@ interface UserDao {
     fun getAllUsers():List<User>
 
     @Query("SELECT * FROM User WHERE account In(:account)")//查询账号是否存在
-    fun getUser(account:Long):User
+    fun getUser(account:Long):LiveData<User>
 
     @Query("SELECT * FROM User ")
     fun getAllWordsLive():LiveData<List<User>>

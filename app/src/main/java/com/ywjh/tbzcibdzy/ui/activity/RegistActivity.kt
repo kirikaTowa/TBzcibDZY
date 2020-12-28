@@ -2,6 +2,7 @@ package com.ywjh.tbzcibdzy.ui.activity
 
 
 import android.os.AsyncTask
+import android.os.Binder
 import android.os.Handler
 import android.view.View
 import androidx.lifecycle.*
@@ -16,7 +17,7 @@ import com.ywjh.tbzcibdzy.R
 class RegistActivity : BaseActivity() {
 
     lateinit var  userviewModel:FindUserModel
-
+    var registFlag:Boolean=false
 
     override fun getLayoutid(): Int {
         return R.layout.activity_regist
@@ -28,6 +29,8 @@ class RegistActivity : BaseActivity() {
     }
 
     fun RegistUser(v: View) {
+        //会自动绑定get方法 插入成功后会自动get 设置个变量
+        registFlag=true
         var textcount = Input_account.text.toString()
         var textpws = Input_password.text.toString()
         var textpwsre = Input_passwordreput.text.toString()
@@ -43,19 +46,28 @@ class RegistActivity : BaseActivity() {
 
 
         if (!textcount.isEmpty() && !textpws.isEmpty() && !textpwsre.isEmpty() && textpwsre.equals(textpws)) {
-            userviewModel.findUser?.value = userdao.getUser(textcount.toLong())
+            userviewModel.findUser = userdao.getUser(textcount.toLong())
 
-            if (userdao.getUser(textcount.toLong()) == null) {
-                var user = User(textcount.toLong(), textpws)
 
-                InsertAsyncTask(userdao).execute(user)
-                //增设查询该条记录
-                myToast("插入成功")
-                Handler().postDelayed(Runnable { startActivityAndFinish<LoginActivity>() }, 1000)
-            } else {
-                Input_account.text.clear()
-                myToast("账户已存在")
+            userviewModel.findUser?.let {
+                userviewModel.findUser!!.observe(this, Observer {
+                    if (registFlag==true){
+                        if ((it!=null)){
+                            Input_account.text.clear()
+                            myToast("账户已存在")
+                        }else{
+                            registFlag=false
+                            var user = User(textcount.toLong(), textpws)
+                            InsertAsyncTask(userdao).execute(user)
+                            //增设查询该条记录
+                            myToast("插入成功")
+                            Handler().postDelayed(Runnable { startActivityAndFinish<LoginActivity>() }, 1000)
+                        }
+                    }
+
+                })
             }
+
 
         }
 

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.ywjh.tbzcibdzy.roombasic.GoodsDao
+import com.ywjh.tbzcibdzy.roombasic.GoodsDatabase
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.debug
@@ -18,7 +20,8 @@ import org.jetbrains.anko.toast
 * */
 abstract class BaseFragment: Fragment(), AnkoLogger {
 
-
+    private var goodsdatabase: GoodsDatabase?=null
+    lateinit var goodsdao: GoodsDao
 
 
     //初始化
@@ -49,6 +52,8 @@ abstract class BaseFragment: Fragment(), AnkoLogger {
     }
     //数据的初始化
     protected open fun initData() {
+        goodsdatabase= activity?.applicationContext?.let { GoodsDatabase.getDatabase(it) }!!
+        goodsdao=goodsdatabase?.getGoodsDao()!!
     }
     //adapter与listener间的操作
     protected open fun initListener() {

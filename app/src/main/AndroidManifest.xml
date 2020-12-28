@@ -19,18 +19,25 @@
     <application
             android:allowBackup="true"
             android:name=".App"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
+            android:requestLegacyExternalStorage="true"
+            tools:targetApi="q"
             android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.MainActivity">
-        </activity>
-
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="com.ywjh.cameraalbumtest.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths"/>
+        </provider>
         <meta-data
                 android:name="com.baidu.lbsapi.API_KEY"
                 android:value="O52PIEGn07nkeo0mf5fiuG1bXVUy8s8G"/>
-
         <activity
                 android:name=".ui.activity.SlashActivity"
                 android:theme="@style/AppTheme.FullScreen">
@@ -40,9 +47,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.LoginActivity">
+        </activity>
         <activity android:name=".ui.activity.RegistActivity">
         </activity>
-        <activity android:name=".ui.activity.LoginActivity">
+        <activity android:name=".ui.activity.MainActivity">
         </activity>
 
         <service
